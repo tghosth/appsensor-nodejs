@@ -11,7 +11,7 @@ module.exports = {
         return `Hello again ${name}!`;
     }
 
-},{
+,
 
 /**
  * Get current URL 
