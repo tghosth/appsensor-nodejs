@@ -16,7 +16,6 @@ module.exports = {
 /**
  * Get current URL 
  *
- * @param  {String} name
  * @return {String}
  */
 module.exports = {
