@@ -5,15 +5,35 @@
  * @return {String}
  */
 module.exports = {
-    HelloWorld: function(name) {
+    HelloWorld: function(name) 
+    {
 
-        if (process.env.NODE_ENV !== 'production') 
-        {
-            require('dotenv').load();
-        }
+        return `Hello again ${name}!`;
+    }
 
+};
+
+/**
+ * Get current URL 
+ *
+ * @param  {String} name
+ * @return {String}
+ */
+module.exports = {
+    AppSensorURL: function() 
+    {
         var url = process.env.APPSENSOR_URL;
 
-      return `Hello again ${name}! The URL is :${url}`;
+        return LocalEnv().url;
     }
-  };
+};
+
+function LocalEnv()
+{
+    if (process.env.NODE_ENV !== 'production') 
+    {
+        require('dotenv').load();
+    }
+
+    return process.env;
+}
