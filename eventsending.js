@@ -1,9 +1,10 @@
 const Utils = require('./utils')
 const request = require('request');
 const DetectionPointCategories = require('./detectionpoints').DetectionPointCategories
+const DetectionPoints = require('./detectionpoints').DetectionPoints
 
 /**
- * Get current URL 
+ * Get current URL to which appsensor events are being sent
  *
  * @return {String}
  */
@@ -16,7 +17,13 @@ function AppSensorURL()
 
 module.exports.AppSensorURL = AppSensorURL;
 
-function SendEventByDP(username, detectionPoint)
+/**
+ * Send an AppSensor event using a detection point from the DetectionPoints object
+ *
+ * @param  {String} username
+ * @param  {DetectionPoints} detectionPoint
+ */
+function SendEvent(username, detectionPoint)
 {
     category = DetectionPointCategories[detectionPoint.replace(/[0-9]/g, '')];
     SendEvent(username, category, detectionPoint)
@@ -72,7 +79,6 @@ function SendEvent(username, category, label)
 
 }
 
-module.exports.SendEvent = SendEvent;
 
 
 

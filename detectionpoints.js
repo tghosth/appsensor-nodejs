@@ -1,3 +1,8 @@
+/*
+This file contains objects to use with detection points and allows autocomplete in 
+applications using this module, for example: DetectionPoints.RE1
+*/
+
 const DetectionPoints = 
 {
     RE1: 'RE1',
