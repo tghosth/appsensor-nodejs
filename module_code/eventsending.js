@@ -26,12 +26,12 @@ module.exports.AppSensorURL = AppSensorURL;
 function SendEvent(username, detectionPoint)
 {
     category = DetectionPointCategories[detectionPoint.replace(/[0-9]/g, '')];
-    SendEvent(username, category, detectionPoint)
+    SendEventInner(username, category, detectionPoint)
 }
 
-module.exports.SendEventByDP = SendEventByDP;
+module.exports.SendEvent = SendEvent;
 
-function SendEvent(username, category, label) 
+function SendEventInner(username, category, label) 
 {
     var env = Utils.LocalEnv();
     var url = env.APPSENSOR_URL;
