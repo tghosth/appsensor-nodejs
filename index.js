@@ -11,14 +11,13 @@ module.exports = {
         return `Hello again ${name}!`;
     }
 
-};
+},{
 
 /**
  * Get current URL 
  *
  * @return {String}
  */
-module.exports = {
     AppSensorURL: function() 
     {
         var url = process.env.APPSENSOR_URL;
