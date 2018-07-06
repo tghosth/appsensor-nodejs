@@ -1,3 +1,5 @@
+const request = require('request');
+
 /**
  * Simple hello world function.
  *
@@ -20,10 +22,57 @@ module.exports = {
  */
     AppSensorURL: function() 
     {
-        var url = process.env.APPSENSOR_URL;
+        var url = LocalEnv().APPSENSOR_URL;
 
-        return LocalEnv().url;
+        return `The current URL is: ${url}`;
     }
+
+,
+
+SendEvent: function(username, category, label) 
+    {
+        var url = LocalEnv().APPSENSOR_URL;
+
+        var bodyJson={}
+        bodyJson.user={}
+        bodyJson.detectionPoint={}
+        bodyJson.user.username = username
+        bodyJson.detectionPoint.category = category
+        bodyJson.detectionPoint.label = label
+        bodyJson.timestamp = new Date().toISOString()
+
+
+        const options = {  
+            url: `${url}/api/v1.0/events`,
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'X-Appsensor-Client-Application-Name2': 'myclientapp'
+
+            },
+            json: true,
+            body: bodyJson
+        };
+
+        request(options, function (error, response, body) 
+        {
+            if (error)
+            {
+                //return error;
+                console.log(error);
+                
+            }
+            else
+            {
+                console.log(`Label: ${label}, ResponseCode: ${response && response.statusCode}`);
+            }
+        
+        });
+    
+
+        //return `The current URL is: ${url}`;
+    }
+
 };
 
 function LocalEnv()
