@@ -6,6 +6,6 @@
  */
 module.exports = {
     HelloWorld: function(name) {
-      return `Hello ${name}`;
+      return `Hello again ${name}!`;
     }
   };
