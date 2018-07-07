@@ -26,7 +26,7 @@ module.exports.AppSensorURL = AppSensorURL;
 function SendEvent(username, detectionPoint)
 {
     category = DetectionPointCategories[detectionPoint.replace(/[0-9]/g, '')];
-    SendEventInner(username, category, detectionPoint)
+    return SendEventInner(username, category, detectionPoint)
 }
 
 module.exports.SendEvent = SendEvent;
@@ -59,7 +59,7 @@ function SendEventInner(username, category, label)
 
     options.headers[header_name] = header_val
 
-    //console.log(options.headers)
+    //console.log(JSON.stringify(options))
     //return
     request(options, function (error, response, body) 
     {
@@ -76,6 +76,7 @@ function SendEventInner(username, category, label)
     
     });
 
+    return JSON.stringify(options);
 
 }
 
