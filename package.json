@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/tghosth/appsensor-nodejs#readme",
   "dependencies": {
+    "dateformat": "^3.0.3",
     "dotenv": "^6.0.0",
     "request": "^2.87.0"
   }

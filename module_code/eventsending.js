@@ -38,15 +38,15 @@ function SendEventInner(username, category, label)
     var header_name = env.APPSENSOR_HEADER_NAME;
     var header_val = env.APPSENSOR_HEADER_VALUE;
 
-    var bodyJson={}
-    bodyJson.user={}
-    bodyJson.detectionPoint={}
+    var bodyJson = {}
+    bodyJson.user = {}
+    bodyJson.detectionPoint = {}
     bodyJson.user.username = username
     bodyJson.detectionPoint.category = category
     bodyJson.detectionPoint.label = label
-    bodyJson.timestamp = new Date().toISOString()
-
-
+    bodyJson.timestamp = new Date().toISOString();
+    bodyJson.detectionSystem = {}
+    bodyJson.detectionSystem.detectionSystemId = header_val
     const options = {  
         url: `${url}/api/v1.0/events`,
         method: 'POST',
