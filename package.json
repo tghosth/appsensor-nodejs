@@ -1,6 +1,6 @@
 {
   "name": "appsensor-nodejs",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Client to send appsensor events and pull responses in node.js",
   "main": "module_code\\index.js",
   "scripts": {

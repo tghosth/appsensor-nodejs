@@ -34,7 +34,7 @@ function GetResponses(callback)
     
     });
 
-    return JSON.stringify(options);
+    return options;
 
 }
 
