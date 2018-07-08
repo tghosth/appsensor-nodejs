@@ -1,25 +1,31 @@
+// Bring in the separate modules
 const EventSending = require('./eventsending')
 const GetResponses = require('./getresponses')
+const DetectionPoints = require('./detectionpoints').DetectionPoints
 
-module.exports.DetectionPoints = require('./detectionpoints').DetectionPoints
 
+// Export the relevant objects and methods
+module.exports.DetectionPoints = DetectionPoints
 
-module.exports.AppSensorURL = EventSending.AppSensorURL;
-module.exports.SendEventByDP = EventSending.SendEventByDP;
-module.exports.SendEvent = EventSending.SendEvent;
-module.exports.GetResponses = GetResponses.GetResponses
-
-    
 /**
- * Simple hello world function.
+ * Get current URL to which appsensor events are being sent
  *
- * @param  {String} name
  * @return {String}
  */
-    function HelloWorld(name) 
-    {
-        return `Hello again ${name}!`;
-    }
+module.exports.AppSensorURL = EventSending.AppSensorURL;
 
-module.exports.HelloWorld = HelloWorld;
+/**
+ * Send an AppSensor event using a detection point from the DetectionPoints object
+ *
+ * @param  {String} username
+ * @param  {DetectionPoints} detectionPoint
+ * @return {String} 
+ */
+module.exports.SendEvent = EventSending.SendEvent;
 
+/**
+ * Get responses by providing a simple callback method which returns a string containing the response
+ *
+ * @param  {function} callback // 
+ */
+module.exports.GetResponses = GetResponses.GetResponses

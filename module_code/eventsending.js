@@ -3,11 +3,6 @@ const request = require('request');
 const DetectionPointCategories = require('./detectionpoints').DetectionPointCategories
 const DetectionPoints = require('./detectionpoints').DetectionPoints
 
-/**
- * Get current URL to which appsensor events are being sent
- *
- * @return {String}
- */
 function AppSensorURL() 
 {
     var url = Utils.LocalEnv().APPSENSOR_URL;
@@ -17,12 +12,7 @@ function AppSensorURL()
 
 module.exports.AppSensorURL = AppSensorURL;
 
-/**
- * Send an AppSensor event using a detection point from the DetectionPoints object
- *
- * @param  {String} username
- * @param  {DetectionPoints} detectionPoint
- */
+
 function SendEvent(username, detectionPoint)
 {
     category = DetectionPointCategories[detectionPoint.replace(/[0-9]/g, '')];
@@ -59,19 +49,17 @@ function SendEventInner(username, category, label)
 
     options.headers[header_name] = header_val
 
-    //console.log(JSON.stringify(options))
-    //return
+
     request(options, function (error, response, body) 
     {
         if (error)
         {
-            //return error;
-            console.log(error);
+            //console.log(error);
             
         }
         else
         {
-            console.log(`Label: ${label}, ResponseCode: ${response && response.statusCode}`);
+            //console.log(`Label: ${label}, ResponseCode: ${response && response.statusCode}`);
         }
     
     });
