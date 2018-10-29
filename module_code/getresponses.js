@@ -38,6 +38,4 @@ function GetResponses(callback)
 
 }
 
-var responseCallback = 
-
 module.exports.GetResponses = GetResponses;
