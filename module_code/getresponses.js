@@ -1,7 +1,30 @@
 const Utils = require('./utils')
 const request = require('request');
+var system_sleep = require('system-sleep')
 
-function GetResponses(callback) 
+function GetResponses()
+{
+    status = "NOTDONE";
+    responses = "";
+
+    setTimeout(()=>{
+         status = "FAILED";
+         }, 5000);
+
+         GetResponsesInner((responseOut)=>{
+            responses = responseOut;
+            status = "DONE";
+    });
+
+    while(status == "NOTDONE"){
+        system_sleep(100);
+    }
+
+    return responses;
+} 
+
+
+function GetResponsesInner(callback) 
 {
     var env = Utils.LocalEnv();
     var url = env.APPSENSOR_URL;
