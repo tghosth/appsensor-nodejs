@@ -12,31 +12,51 @@ function AppSensorURL()
 
 module.exports.AppSensorURL = AppSensorURL;
 
-
-function SendEvent(detectionPoint, username)
-{
-    category = DetectionPointCategories[detectionPoint.replace(/[0-9]/g, '')];
-    return SendEventInner(username, category, detectionPoint)
-}
-
 module.exports.SendEvent = SendEvent;
 
-function SendEventInner(username, category, label) 
+function SendEvent(label, eventOptions)
 {
+    category = DetectionPointCategories[label.replace(/[0-9]/g, '')];
+
     var env = Utils.LocalEnv();
     var url = env.APPSENSOR_URL;
     var header_name = env.APPSENSOR_HEADER_NAME;
     var header_val = env.APPSENSOR_HEADER_VALUE;
 
     var bodyJson = {}
-    bodyJson.user = {}
-    bodyJson.detectionPoint = {}
-    bodyJson.user.username = username
-    bodyJson.detectionPoint.category = category
-    bodyJson.detectionPoint.label = label
-    bodyJson.timestamp = new Date().toISOString();
+
     bodyJson.detectionSystem = {}
     bodyJson.detectionSystem.detectionSystemId = header_val
+
+    bodyJson.detectionSystem.ipAddress = {};
+    bodyJson.detectionSystem.ipAddress.address = 'local';
+    bodyJson.detectionSystem.ipAddress.geoLocation = {};
+    bodyJson.detectionSystem.ipAddress.geoLocation.latitude = 0;
+    bodyJson.detectionSystem.ipAddress.geoLocation.longitude = 0;
+
+   
+    bodyJson.user = {}
+    bodyJson.detectionPoint = {}
+    if (eventOptions)
+    {
+        if (eventOptions.username != undefined) 
+        {
+            //bodyJson.user.username = eventOptions.username == "" ? "<<UNKNOWN>>" : eventOptions.username;
+            bodyJson.user.username = eventOptions.username
+        }
+        if (eventOptions.SourceIP) 
+        {
+            bodyJson.user.ipAddress = {};
+            bodyJson.user.ipAddress.address = eventOptions.SourceIP;
+            bodyJson.user.ipAddress.geoLocation = {};
+            bodyJson.user.ipAddress.geoLocation.latitude = 0;
+            bodyJson.user.ipAddress.geoLocation.longitude = 0;
+        }
+    }
+    bodyJson.detectionPoint.category = category;
+    bodyJson.detectionPoint.label = label
+    bodyJson.timestamp = new Date().toISOString();
+
     const options = {  
         url: `${url}/api/v1.0/events`,
         method: 'POST',
