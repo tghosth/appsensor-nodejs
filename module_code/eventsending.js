@@ -39,11 +39,8 @@ function SendEvent(label, eventOptions)
     bodyJson.detectionPoint = {}
     if (eventOptions)
     {
-        if (eventOptions.username != undefined) 
-        {
-            //bodyJson.user.username = eventOptions.username == "" ? "<<UNKNOWN>>" : eventOptions.username;
-            bodyJson.user.username = eventOptions.username
-        }
+        bodyJson.user.username = eventOptions.username ? eventOptions.username : "";
+        
         if (eventOptions.SourceIP) 
         {
             bodyJson.user.ipAddress = {};
