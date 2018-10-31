@@ -13,7 +13,7 @@ function AppSensorURL()
 module.exports.AppSensorURL = AppSensorURL;
 
 
-function SendEvent(username, detectionPoint)
+function SendEvent(detectionPoint, username)
 {
     category = DetectionPointCategories[detectionPoint.replace(/[0-9]/g, '')];
     return SendEventInner(username, category, detectionPoint)
